@@ -47,7 +47,7 @@ public class MemoryCandidateRepository implements CandidateRepository {
                         oldCandidate.getId(),
                         candidate.getName(),
                         candidate.getDescription(),
-                        candidate.getCreationDate()
+                        oldCandidate.getCreationDate()
                 )) != null;
     }
 
