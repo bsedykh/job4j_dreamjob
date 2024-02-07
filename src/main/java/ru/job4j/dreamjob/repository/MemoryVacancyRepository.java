@@ -19,12 +19,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     private MemoryVacancyRepository() {
         var now = LocalDateTime.now();
-        save(new Vacancy(0, "Intern Java Developer", "Description for intern", now));
-        save(new Vacancy(0, "Junior Java Developer", "Description for junior", now));
-        save(new Vacancy(0, "Junior+ Java Developer", "Description for junior+", now));
-        save(new Vacancy(0, "Middle Java Developer", "Description for middle", now));
-        save(new Vacancy(0, "Middle+ Java Developer", "Description for middle+", now));
-        save(new Vacancy(0, "Senior Java Developer", "Description for senior", now));
+        save(new Vacancy(1, "Intern Java Developer", "Description for intern", now));
+        save(new Vacancy(2, "Junior Java Developer", "Description for junior", now));
+        save(new Vacancy(3, "Junior+ Java Developer", "Description for junior+", now));
+        save(new Vacancy(4, "Middle Java Developer", "Description for middle", now));
+        save(new Vacancy(5, "Middle+ Java Developer", "Description for middle+", now));
+        save(new Vacancy(6, "Senior Java Developer", "Description for senior", now));
     }
 
     public static MemoryVacancyRepository getInstance() {
@@ -39,8 +39,8 @@ public class MemoryVacancyRepository implements VacancyRepository {
     }
 
     @Override
-    public void deleteById(int id) {
-        vacancies.remove(id);
+    public boolean deleteById(int id) {
+        return vacancies.remove(id) != null;
     }
 
     @Override
