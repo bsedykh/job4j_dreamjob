@@ -10,28 +10,29 @@
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 
-    <title>Создание кандидата</title>
+    <title>Редактирование кандидата</title>
 </head>
 <body>
 <div class="container-fluid p-0">
     <header th:insert="blocks/header :: header"></header>
     <div class="container">
-        <form class="mt-3" th:action="@{/candidates/create}" method="post">
+        <form class="mt-3" th:action="@{/candidates/update}" method="post" th:object="${candidate}">
+            <input type="hidden" th:field="*{id}">
             <div class="mb-3">
-                <label for="name" class="form-label"><b>ФИО</b></label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Фамилия, имя, отчество">
+                <label for="title" class="form-label"><b>ФИО</b></label>
+                <input type="text" class="form-control" th:field="*{name}" placeholder="Фамилия, имя, отчество">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label"><b>Описание</b></label>
-                <textarea class="form-control" id="description" name="description" rows="25" placeholder="Опишите опыт работы"></textarea>
+                <textarea class="form-control" th:field="*{description}" rows="25" placeholder="Опишите опыт работы"></textarea>
             </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/candidates}">Отмена</a></div>
-                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Сохранить</button>
-                        </div>
+                        <div class="col-4"><a class="btn btn-light w-100" th:href="@{/candidates}">Отмена</a></div>
+                        <div class="col-4"><a class="btn btn-danger w-100" th:href="@{/candidates/delete/{id}(id=${candidate.id})}">Удалить</a></div>
+                        <div class="col-4"><button class="btn btn-success w-100" type="submit">Обновить</button></div>
                     </div>
                 </div>
             </div>
