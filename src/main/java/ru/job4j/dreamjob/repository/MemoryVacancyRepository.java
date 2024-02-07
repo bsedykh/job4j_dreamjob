@@ -11,13 +11,11 @@ import java.util.Optional;
 
 @Repository
 public class MemoryVacancyRepository implements VacancyRepository {
-    private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
-
     private int nextId = 1;
 
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
-    private MemoryVacancyRepository() {
+    public MemoryVacancyRepository() {
         var now = LocalDateTime.now();
         save(new Vacancy(0, "Intern Java Developer", "Description for intern", now));
         save(new Vacancy(0, "Junior Java Developer", "Description for junior", now));
@@ -25,10 +23,6 @@ public class MemoryVacancyRepository implements VacancyRepository {
         save(new Vacancy(0, "Middle Java Developer", "Description for middle", now));
         save(new Vacancy(0, "Middle+ Java Developer", "Description for middle+", now));
         save(new Vacancy(0, "Senior Java Developer", "Description for senior", now));
-    }
-
-    public static MemoryVacancyRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override

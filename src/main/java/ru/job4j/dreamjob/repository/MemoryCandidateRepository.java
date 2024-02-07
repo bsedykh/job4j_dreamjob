@@ -11,21 +11,15 @@ import java.util.Optional;
 
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
-
     private int nextId = 1;
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
-    private MemoryCandidateRepository() {
+    public MemoryCandidateRepository() {
         var now = LocalDateTime.now();
         save(new Candidate(0, "Ivanov Ivan", "Description for Ivanov", now));
         save(new Candidate(0, "Petrov Petr", "Description for Petrov", now));
         save(new Candidate(0, "Sidorov Sidor", "Description for Sidorov", now));
-    }
-
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override
