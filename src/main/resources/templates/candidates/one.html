@@ -26,6 +26,12 @@
                 <label for="description" class="form-label"><b>Описание</b></label>
                 <textarea class="form-control" th:field="*{description}" rows="25" placeholder="Опишите опыт работы"></textarea>
             </div>
+            <div class="mb-3">
+                <label th:for="cityId"><b>Город</b></label>
+                <select class="form-control" th:field="*{cityId}">
+                    <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:selected="${city.id==cityId}"></option>
+                </select>
+            </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>
                 <div class="col-6">
