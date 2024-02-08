@@ -16,25 +16,38 @@
 <div class="container-fluid p-0">
     <header th:insert="blocks/header :: header"></header>
     <div class="container">
-        <form class="mt-3" th:action="@{/vacancies/update}" method="post" th:object="${vacancy}">
-            <input type="hidden" th:field="*{id}">
-            <div class="mb-3">
-                <label for="title" class="form-label"><b>Название</b></label>
-                <input type="text" class="form-control" th:field="*{title}" placeholder="Предлагая должность, например, Ведущий Java разработчик">
+        <form class="mt-3" th:action="@{/vacancies/update}" method="post" th:object="${vacancy}" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:field="*{id}">
+            <input type="hidden" name="fileId" th:field="*{fileId}">
+            <div class="row mb-3">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <img th:src="@{/files/{fileId}(fileId=*{fileId})}" class="w-100" alt="No image">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control form-control-sm w-100" type="file" id="formFile" name="file">
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="mb-3">
+                        <label th:for="title" class="form-label"><b>Название</b></label>
+                        <input type="text" class="form-control" th:field="*{title}" placeholder="Предлагая должность, например, Ведущий Java разработчик">
+                    </div>
+                    <div class="mb-3">
+                        <label th:for="cityId"><b>Город</b></label>
+                        <select class="form-control" th:field="*{cityId}">
+                            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:selected="${city.id==cityId}"></option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" th:field="*{visible}">
+                        <label class="form-check-label" th:for="visible">Опубликовать</label>
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label"><b>Описание</b></label>
+                <label th:for="description" class="form-label"><b>Описание</b></label>
                 <textarea class="form-control" th:field="*{description}" rows="25" placeholder="Опишите требования к кандидату"></textarea>
-            </div>
-            <div class="form-check mb-3">
-                <input type="checkbox" name="visible" class="form-check-input" id="visible" th:field="*{visible}">
-                <label class="form-check-label" for="visible">Опубликовать</label>
-            </div>
-            <div class="mb-3">
-                <label th:for="cityId"><b>Город</b></label>
-                <select class="form-control" th:field="*{cityId}">
-                    <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:selected="${city.id==cityId}"></option>
-                </select>
             </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>

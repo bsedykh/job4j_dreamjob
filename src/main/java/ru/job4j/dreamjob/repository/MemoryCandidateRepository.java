@@ -21,9 +21,9 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     public MemoryCandidateRepository() {
         var now = LocalDateTime.now();
-        save(new Candidate(0, "Ivanov Ivan", "Description for Ivanov", now, 1));
-        save(new Candidate(0, "Petrov Petr", "Description for Petrov", now, 1));
-        save(new Candidate(0, "Sidorov Sidor", "Description for Sidorov", now, 1));
+        save(new Candidate(0, "Ivanov Ivan", "Description for Ivanov", now, 1, 0));
+        save(new Candidate(0, "Petrov Petr", "Description for Petrov", now, 2, 0));
+        save(new Candidate(0, "Sidorov Sidor", "Description for Sidorov", now, 3, 0));
     }
 
     @Override
@@ -46,7 +46,8 @@ public class MemoryCandidateRepository implements CandidateRepository {
                         candidate.getName(),
                         candidate.getDescription(),
                         oldCandidate.getCreationDate(),
-                        candidate.getCityId()
+                        candidate.getCityId(),
+                        candidate.getFileId()
                 )) != null;
     }
 
