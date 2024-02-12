@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" th:field="*{visible}">
-                        <label class="form-check-label" th:for="visible">Опубликовать</label>
+                        <label class="form-check-label" th:for="${#ids.prev('visible')}">Опубликовать</label>
                     </div>
                 </div>
             </div>
