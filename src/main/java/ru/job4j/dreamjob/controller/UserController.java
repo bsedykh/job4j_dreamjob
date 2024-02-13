@@ -21,14 +21,12 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegistrationPage(Model model, HttpSession session) {
-        ControllerUtils.setUser(model, session);
+    public String getRegistrationPage() {
         return "users/register";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user, HttpSession session) {
-        ControllerUtils.setUser(model, session);
+    public String register(Model model, @ModelAttribute("submittedUser") User user) {
         var savedUser = userService.save(user);
         if (savedUser.isEmpty()) {
             model.addAttribute("error",
@@ -39,14 +37,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        ControllerUtils.setUser(model, session);
+    public String getLoginPage() {
         return "users/login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model, HttpSession session) {
-        ControllerUtils.setUser(model, session);
+    public String loginUser(@ModelAttribute("submittedUser") User user, Model model, HttpSession session) {
         var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
